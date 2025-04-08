@@ -1,0 +1,49 @@
+<ChallengeTracker>:
+    orientation: "vertical"
+    padding: 20
+    spacing: 15
+
+    Label:
+        text: "Level " + str(root.level) + " | XP: " + str(root.xp)
+        font_size: 22
+
+    ProgressBar:
+        value: root.progress_percent
+        max: 100
+        height: 20
+
+    Label:
+        text: root.current_day
+        font_size: 20
+        size_hint_y: None
+        height: 40
+
+    ToggleButton:
+        text: "Workout Completed"
+        state: "down" if root.status[0] else "normal"
+        on_press: root.mark_done(0)
+
+    ToggleButton:
+        text: "Mental AM Routine Done"
+        state: "down" if root.status[1] else "normal"
+        on_press: root.mark_done(1)
+
+    ToggleButton:
+        text: "Mental PM Reflection Done"
+        state: "down" if root.status[2] else "normal"
+        on_press: root.mark_done(2)
+
+    Button:
+        text: "Reset Day"
+        on_press: root.reset_day()
+
+    Button:
+        text: "Show Weekly Summary"
+        on_press: app.root.ids.summary_label.text = root.get_weekly_summary()
+
+    Label:
+        id: summary_label
+        text: ""
+        font_size: 14
+        size_hint_y: None
+        height: self.texture_size[1] + 20
